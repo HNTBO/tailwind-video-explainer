@@ -19,6 +19,7 @@ const episodesDir = path.join(__dirname, "..", "src", "episodes");
 // Configuration
 const VOICE = "shimmer";
 const MODEL = "tts-1"; // Use "tts-1-hd" for higher quality
+const SPEED = 0.95; // Slightly slower (0.25-4.0, default 1.0)
 
 function extractVoiceoverText(markdown) {
   // Extract text between ## Voiceover Script and the next ## or ---
@@ -43,6 +44,34 @@ function extractVoiceoverText(markdown) {
   return text;
 }
 
+/**
+ * Add breathing room for educational content.
+ * Uses "..." to create natural pauses between sentences and ideas.
+ * This is crucial for technical/educational content - gives viewers time to process.
+ */
+function addBreathingRoom(text) {
+  let processed = text;
+
+  // Add pause (ellipsis) after each sentence for breathing room
+  // The "..." creates a ~0.5s pause in most TTS engines
+  processed = processed.replace(/\. /g, ". ... ");
+
+  // Add longer pause after questions
+  processed = processed.replace(/\? /g, "? ... ");
+
+  // Add pause after em-dashes (—) which often introduce examples
+  processed = processed.replace(/ — /g, " ... ");
+  processed = processed.replace(/—/g, " ... ");
+
+  // Add pause after colons (before explanations or lists)
+  processed = processed.replace(/: /g, ": ... ");
+
+  // Clean up any excessive pauses
+  processed = processed.replace(/(\.\.\.\s*){2,}/g, "... ");
+
+  return processed;
+}
+
 async function generateVoiceover(text) {
   const apiKey = process.env.OPENAI_API_KEY;
 
@@ -52,6 +81,7 @@ async function generateVoiceover(text) {
 
   console.log(`  Using voice: ${VOICE}`);
   console.log(`  Using model: ${MODEL}`);
+  console.log(`  Speed: ${SPEED}x`);
   console.log(`  Text length: ${text.length} characters`);
   console.log(`  Estimated cost: $${(text.length * 0.000015).toFixed(4)}`);
   console.log("");
@@ -66,6 +96,7 @@ async function generateVoiceover(text) {
       model: MODEL,
       input: text,
       voice: VOICE,
+      speed: SPEED,
       response_format: "mp3",
     }),
   });
@@ -116,9 +147,12 @@ async function main() {
 
   // Extract voiceover text
   const markdown = fs.readFileSync(scriptPath, "utf-8");
-  const voiceoverText = extractVoiceoverText(markdown);
+  const rawText = extractVoiceoverText(markdown);
+  const voiceoverText = addBreathingRoom(rawText);
 
   console.log(`\nExtracted text preview:`);
+  console.log(`  "${rawText.slice(0, 80)}..."\n`);
+  console.log(`With breathing room:`);
   console.log(`  "${voiceoverText.slice(0, 100)}..."\n`);
 
   // Generate audio
