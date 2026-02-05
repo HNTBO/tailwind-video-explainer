@@ -4,8 +4,8 @@
  * Usage: node scripts/generate-voiceover.mjs <episode-number>
  * Example: node scripts/generate-voiceover.mjs 1
  *
- * Reads from: src/episodes/ep{XX}-*/script_revised.md (or script.md as fallback)
- * Outputs to: src/episodes/ep{XX}-*/voiceover.mp3
+ * Reads from: src/episodes/epXX-name/script_revised.md (or script.md fallback)
+ * Outputs to: src/episodes/epXX-name/voiceover.mp3
  */
 
 import "dotenv/config";
