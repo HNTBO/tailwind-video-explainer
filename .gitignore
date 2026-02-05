@@ -16,3 +16,8 @@ out
 
 # Voice test samples (regenerate with: node scripts/test-voices.mjs)
 audio/voice-tests/
+
+# Video output files (large, can be regenerated)
+*.mp4
+*.webm
+*.mov

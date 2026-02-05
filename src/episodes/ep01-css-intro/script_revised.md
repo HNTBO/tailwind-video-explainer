@@ -116,6 +116,6 @@ Next up: The Box Model — how every element takes up space on the page.
 - [x] v1 draft
 - [x] External review (GPT-5.2)
 - [x] v2 revised
-- [ ] Final approval
-- [ ] Voiceover generated
-- [ ] Composition built
+- [x] Final approval
+- [x] Voiceover generated (shimmer, tts-1-hd)
+- [x] Composition built (10 scenes synced to audio)
