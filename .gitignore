@@ -13,3 +13,6 @@ out
 .cursor/
 .gemini/
 .opencode/
+
+# Voice test samples (regenerate with: node scripts/test-voices.mjs)
+audio/voice-tests/
