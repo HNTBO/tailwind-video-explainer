@@ -5,3 +5,11 @@ dist
 
 # Ignore the output video from Git but not videos you import into src/.
 out
+
+# AI tool configs (local only)
+.agent/
+.agents/
+.codex/
+.cursor/
+.gemini/
+.opencode/
