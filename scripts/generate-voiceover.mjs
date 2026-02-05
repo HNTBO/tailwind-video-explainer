@@ -18,8 +18,8 @@ const episodesDir = path.join(__dirname, "..", "src", "episodes");
 
 // Configuration
 const VOICE = "shimmer";
-const MODEL = "tts-1"; // Use "tts-1-hd" for higher quality
-const SPEED = 0.95; // Slightly slower (0.25-4.0, default 1.0)
+const MODEL = "tts-1-hd"; // HD quality for professional output
+const SPEED = 1.0; // Normal speed (0.25-4.0, default 1.0)
 
 function extractVoiceoverText(markdown) {
   // Extract text between ## Voiceover Script and the next ## or ---
