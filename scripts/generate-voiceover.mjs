@@ -4,7 +4,7 @@
  * Usage: node scripts/generate-voiceover.mjs <episode-number>
  * Example: node scripts/generate-voiceover.mjs 1
  *
- * Reads from: src/episodes/epXX-name/script_revised.md (or script.md fallback)
+ * Reads from: src/episodes/epXX-name/script-revised.md (or script.md fallback)
  * Outputs to: src/episodes/epXX-name/voiceover.mp3
  */
 
@@ -133,7 +133,7 @@ async function main() {
   console.log("=".repeat(40));
 
   // Find script file (prefer revised)
-  let scriptPath = path.join(epPath, "script_revised.md");
+  let scriptPath = path.join(epPath, "script-revised.md");
   if (!fs.existsSync(scriptPath)) {
     scriptPath = path.join(epPath, "script.md");
   }

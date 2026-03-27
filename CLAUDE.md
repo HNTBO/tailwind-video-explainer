@@ -42,3 +42,20 @@ bd sync               # Sync with git
 ```
 
 **Critical**: Work sessions must end with `git push` succeeding. Never leave changes stranded locally.
+
+## External Review (Codex CLI)
+
+For script reviews using GPT-5.2, use the Codex CLI via WSL. The CLI is installed via nvm, so an interactive shell is required.
+
+```bash
+# Correct invocation pattern:
+wsl bash -ic 'codex exec -m gpt-5.2 "your prompt here"'
+```
+
+**Key points:**
+- Must use `bash -ic` (interactive shell) to load nvm environment
+- Use `codex exec` subcommand for non-interactive execution
+- Model flag is `-m` or `--model`
+- Prompt goes as the final positional argument in quotes
+
+**Review prompt template:** See `scripts/review-prompt-template.md` for the standard episode script review format.
